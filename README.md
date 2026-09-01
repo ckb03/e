@@ -192,6 +192,10 @@ The first notebook creates prompt-injection variants, runs the ReAct loop for
 injected query.
 
 
+## Reusable GPT-OSS-20B agent evaluation
+
+A config-driven, network-safe runner for the local GPT-OSS agent evaluation is documented in [EVAL_SETUP.md](EVAL_SETUP.md). Hardware migration notes, measured runtime, comparability caveats, and optimization TODOs are in [H200_HANDOFF.md](H200_HANDOFF.md).
+
 ## Citation
 
 ```bibtex
