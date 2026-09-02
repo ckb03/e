@@ -58,6 +58,36 @@ def build_parser() -> argparse.ArgumentParser:
     tool_collect_parser.add_argument("--tail-tokens", type=int, default=128)
     tool_collect_parser.add_argument("--resume", action="store_true")
 
+    commands.add_parser(
+        "analyze-steering-layers",
+        help="fit clean gates and screen layers using saved activations",
+    )
+    rescore_parser = commands.add_parser(
+        "rescore-steering-baseline",
+        help="apply the grounded-summary utility scorer to saved baselines",
+    )
+    rescore_parser.add_argument(
+        "--dataset", choices=("clean", "layer"), required=True
+    )
+    steering_run_parser = commands.add_parser(
+        "run-steering", help="run a soft-pairwise or continuous intervention"
+    )
+    steering_run_parser.add_argument(
+        "--dataset", choices=("layer", "tune", "devval"), required=True
+    )
+    steering_run_parser.add_argument(
+        "--method", choices=("soft-pairwise", "continuous"), required=True
+    )
+    steering_run_parser.add_argument("--layer", type=int, required=True)
+    steering_run_parser.add_argument("--alpha", type=float, required=True)
+    steering_run_parser.add_argument("--rank", type=int, default=4)
+    steering_run_parser.add_argument("--run-name", required=True)
+    steering_run_parser.add_argument(
+        "--config", default="configs/gpt-oss-20b.yaml"
+    )
+    steering_run_parser.add_argument("--attack-only", action="store_true")
+    steering_run_parser.add_argument("--resume", action="store_true")
+
     run_parser = commands.add_parser("run", help="run GPT-OSS evaluation")
     run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     run_parser.add_argument("--limit", type=int)
@@ -145,6 +175,43 @@ def main() -> None:
             max_tokens_per_message=args.max_tokens_per_message,
             tail_tokens=args.tail_tokens,
         )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "analyze-steering-layers":
+        from .steering_diagnostics import analyze_layer_separation
+
+        output = analyze_layer_separation(repo)
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "rescore-steering-baseline":
+        from .steering_diagnostics import rescore_saved_tool_results
+
+        output = rescore_saved_tool_results(repo, args.dataset)
+        print((output / "summary_task_quality.json").read_text())
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "run-steering":
+        from .steering_runtime import run_steering
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = run_steering(
+            repo,
+            dataset=args.dataset,
+            config_path=config_path,
+            method=args.method,
+            layer=args.layer,
+            alpha=args.alpha,
+            rank=args.rank,
+            run_name=args.run_name,
+            attack_only=args.attack_only,
+            resume=args.resume,
+        )
+        print((output / "summary.json").read_text())
         print(f"Artifacts: {output}")
         return
 
