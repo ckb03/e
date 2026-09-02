@@ -88,6 +88,15 @@ def build_parser() -> argparse.ArgumentParser:
     steering_run_parser.add_argument("--attack-only", action="store_true")
     steering_run_parser.add_argument("--resume", action="store_true")
 
+    steering_debug_parser = commands.add_parser(
+        "debug-steering",
+        help="replay adverse soft-pairwise cases and write a token-level report",
+    )
+    steering_debug_parser.add_argument(
+        "--config", default="configs/gpt-oss-20b.yaml"
+    )
+    steering_debug_parser.add_argument("--output-dir", type=Path)
+
     run_parser = commands.add_parser("run", help="run GPT-OSS evaluation")
     run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     run_parser.add_argument("--limit", type=int)
@@ -213,6 +222,19 @@ def main() -> None:
         )
         print((output / "summary.json").read_text())
         print(f"Artifacts: {output}")
+        return
+
+    if args.command == "debug-steering":
+        from .steering_debug import build_steering_debug_report
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output_dir = args.output_dir
+        if output_dir is not None and not output_dir.is_absolute():
+            output_dir = repo / output_dir
+        output = build_steering_debug_report(repo, config_path, output_dir)
+        print(f"Report: {output}")
         return
 
     if args.command == "compare":
