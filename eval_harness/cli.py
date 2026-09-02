@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 from .config import Config
@@ -23,7 +24,22 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser = commands.add_parser("run", help="run GPT-OSS evaluation")
     run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     run_parser.add_argument("--limit", type=int)
+    run_parser.add_argument(
+        "--case-ids",
+        help="comma-separated manifest case IDs in the exact requested order",
+    )
     run_parser.add_argument("--run-name")
+    run_parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="resume an interrupted run after validating its metadata",
+    )
+    compare_parser = commands.add_parser(
+        "compare", help="compare two run directories for exact behavior"
+    )
+    compare_parser.add_argument("--reference", type=Path, required=True)
+    compare_parser.add_argument("--candidate", type=Path, required=True)
+    compare_parser.add_argument("--output", type=Path)
     return parser
 
 
@@ -37,12 +53,32 @@ def main() -> None:
         print(output)
         return
 
+    if args.command == "compare":
+        from .runner import compare_run_dirs
+
+        report = compare_run_dirs(args.reference, args.candidate)
+        payload = json.dumps(report, indent=2) + "\n"
+        if args.output:
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(payload)
+        print(payload, end="")
+        raise SystemExit(0 if report["all_equivalent"] else 1)
+
     from .runner import run
 
     config_path = Path(args.config)
     if not config_path.is_absolute():
         config_path = repo / config_path
-    output = run(Config.load(config_path), args.limit, args.run_name)
+    case_ids = None
+    if args.case_ids:
+        case_ids = [int(value) for value in args.case_ids.split(",")]
+    output = run(
+        Config.load(config_path),
+        limit=args.limit,
+        run_name=args.run_name,
+        resume=args.resume,
+        case_ids=case_ids,
+    )
     print((output / "summary.json").read_text())
     print(f"Artifacts: {output}")
 
