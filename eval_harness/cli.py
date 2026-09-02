@@ -21,6 +21,14 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_parser.add_argument("--max-kb", type=int, default=100)
     prepare_parser.add_argument("--overwrite", action="store_true")
 
+    steering_parser = commands.add_parser(
+        "prepare-steering", help="freeze disjoint steering datasets"
+    )
+    steering_parser.add_argument("--repr-seed", type=int, default=20260902)
+    steering_parser.add_argument("--wikipedia-seed", type=int, default=20260903)
+    steering_parser.add_argument("--max-kb", type=int, default=100)
+    steering_parser.add_argument("--force", action="store_true")
+
     run_parser = commands.add_parser("run", help="run GPT-OSS evaluation")
     run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     run_parser.add_argument("--limit", type=int)
@@ -51,6 +59,19 @@ def main() -> None:
 
         output = prepare(repo, args.pages, args.seed, args.max_kb, args.overwrite)
         print(output)
+        return
+
+    if args.command == "prepare-steering":
+        from .steering_data import prepare_steering_data
+
+        report = prepare_steering_data(
+            repo,
+            repr_seed=args.repr_seed,
+            wikipedia_seed=args.wikipedia_seed,
+            max_kb=args.max_kb,
+            force=args.force,
+        )
+        print(json.dumps(report, indent=2))
         return
 
     if args.command == "compare":
