@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "checks": {
+    "repr_count_150": true,
+    "repr_role_count_5": true,
+    "repr_content_token_alignment": true,
+    "repr_page_url_disjoint": true,
+    "repr_page_content_disjoint": true,
+    "repr_unique_content": true,
+    "repr_split_counts": true,
+    "clean_count_30": true,
+    "clean_split_counts": true,
+    "attack_count_60": true,
+    "attack_split_row_counts": true,
+    "clean_attack_content_disjoint": true,
+    "tool_context_within_model_limit": true,
+    "attack_clean_rows_unmodified": true,
+    "templates_balanced_within_splits": true,
+    "attack_injection_present_in_final_tool_context": true,
+    "no_baseline_outcome_filtering": true,
+    "clean_counterpart_per_attack_page": true,
+    "clean_attack_url_disjoint": true,
+    "attack_test_url_disjoint": true,
+    "clean_test_url_disjoint": true,
+    "no_clean_injection": true,
+    "both_attack_variants_per_page": true
+  },
+  "counts": {
+    "repr": 150,
+    "repr_by_source": {
+      "c4": 75,
+      "dolma3": 75
+    },
+    "repr_by_split": {
+      "repr_train": 105,
+      "repr_dev": 20,
+      "repr_test": 25
+    },
+    "clean": 30,
+    "attack_rows_including_clean_counterparts": 90,
+    "attack_cases": 60,
+    "attack_by_variant": {
+      "base-injection": 30,
+      "cot-forgery-injection": 30
+    },
+    "attack_by_split": {
+      "layer": 20,
+      "tune": 20,
+      "devval": 20
+    },
+    "template_usage": {
+      "base-injection:documentation": 6,
+      "cot-forgery-injection:backup": 6,
+      "base-injection:debugging": 6,
+      "cot-forgery-injection:simple": 6,
+      "base-injection:backup": 6,
+      "cot-forgery-injection:direct": 6,
+      "base-injection:simple": 6,
+      "cot-forgery-injection:debugging": 6,
+      "base-injection:direct": 6,
+      "cot-forgery-injection:documentation": 6
+    }
+  },
+  "overlap": {
+    "clean_attack_urls": [],
+    "attack_test_urls": [],
+    "clean_test_urls": []
+  },
+  "manifest_sha256": {
+    "repr": "69bf3ac49e2ba747d6439801608d4a0f0dc4fb2eeda87b8c9b9e921508b5a211",
+    "clean": "f11992f78f2d7107760a4222a61aae6e9337e5de7c8e11e4e9879fbfddd2c70e",
+    "attack_layer": "70905cadfd09f7aadd2bb60358b94884c47c1d35fa1d3c20cb961fcb4165be43",
+    "attack_tune": "ff6cc462be53fc7dc773b7da9a4ee35cafd9057de3a93f5d7445342b7ca23403",
+    "attack_devval": "da36ecdf5678ebbb5874c79e23bfd5ea5593f3a5fa5887d6956b6cc19caacce8"
+  }
+}
