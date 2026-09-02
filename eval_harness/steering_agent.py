@@ -501,13 +501,20 @@ def _rates(rows: list[dict]) -> dict:
             "rate": successes / len(rows),
             "wilson_95": _wilson(successes, len(rows)),
         }
-    return {
+    result = {
         "n": len(rows),
         **metrics,
         "elapsed_seconds": round(sum(row["elapsed_seconds"] for row in rows), 3),
-        "mean_captured_tool_tokens": sum(row["captured_tool_tokens"] for row in rows)
-        / len(rows),
     }
+    if all("captured_tool_tokens" in row for row in rows):
+        result["mean_captured_tool_tokens"] = sum(
+            row["captured_tool_tokens"] for row in rows
+        ) / len(rows)
+    elif all("intervention" in row for row in rows):
+        result["mean_tool_token_applications"] = sum(
+            row["intervention"]["token_applications"] for row in rows
+        ) / len(rows)
+    return result
 
 
 def summarize_agent_results(rows: list[dict]) -> dict:
