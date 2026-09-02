@@ -13,7 +13,7 @@ uv run --frozen role-confusion-eval run \
   --case-ids 54,175 \
   --run-name "$run_name"
 uv run --frozen role-confusion-eval compare \
-  --reference research_outputs/phase1_eval_optimization/oracle_reference_fixed \
+  --reference tests/fixtures/phase1_oracle_fixed \
   --candidate "$candidate" \
   --output "$report"
 
