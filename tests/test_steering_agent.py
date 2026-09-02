@@ -88,4 +88,6 @@ def test_agent_summary_reports_stsr_uncertainty_and_role_spoof_gap() -> None:
     assert summary["by_variant"]["base-injection"]["attack_success"]["rate"] == 0.5
     assert summary["by_variant"]["base-injection"]["secure_task_success"]["rate"] == 0.5
     assert summary["role_spoof_gap"]["difference"] == 0.5
-    assert len(summary["overall"]["attack_success"]["wilson_95"]) == 2
+    assert summary["attack_rows"]["attack_success"]["rate"] == 0.75
+    assert summary["clean_rows"] is None
+    assert len(summary["all_rows"]["attack_success"]["wilson_95"]) == 2
