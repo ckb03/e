@@ -29,6 +29,35 @@ def build_parser() -> argparse.ArgumentParser:
     steering_parser.add_argument("--max-kb", type=int, default=100)
     steering_parser.add_argument("--force", action="store_true")
 
+    repr_collect_parser = commands.add_parser(
+        "collect-repr-activations",
+        help="collect aligned post-block residual activations for D_repr",
+    )
+    repr_collect_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
+    repr_collect_parser.add_argument("--max-tokens-per-base", type=int, default=64)
+    repr_collect_parser.add_argument("--resume", action="store_true")
+
+    repr_analyze_parser = commands.add_parser(
+        "analyze-repr",
+        help="fit layer probes, pair vectors, and continuous role bases",
+    )
+    repr_analyze_parser.add_argument("--seed", type=int, default=20260904)
+    repr_analyze_parser.add_argument("--l2", type=float, default=1e-4)
+    repr_analyze_parser.add_argument("--epochs", type=int, default=80)
+    repr_analyze_parser.add_argument("--svd-rank", type=int, default=16)
+
+    tool_collect_parser = commands.add_parser(
+        "collect-tool-activations",
+        help="run the undefended agent and collect unique Tool-result activations",
+    )
+    tool_collect_parser.add_argument(
+        "--dataset", choices=("clean", "layer"), required=True
+    )
+    tool_collect_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
+    tool_collect_parser.add_argument("--max-tokens-per-message", type=int, default=512)
+    tool_collect_parser.add_argument("--tail-tokens", type=int, default=128)
+    tool_collect_parser.add_argument("--resume", action="store_true")
+
     run_parser = commands.add_parser("run", help="run GPT-OSS evaluation")
     run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     run_parser.add_argument("--limit", type=int)
@@ -72,6 +101,51 @@ def main() -> None:
             force=args.force,
         )
         print(json.dumps(report, indent=2))
+        return
+
+    if args.command == "collect-repr-activations":
+        from .steering_repr import collect_representation_activations
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = collect_representation_activations(
+            repo,
+            config_path,
+            max_tokens_per_base=args.max_tokens_per_base,
+            resume=args.resume,
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "analyze-repr":
+        from .steering_repr import analyze_representation_activations
+
+        output = analyze_representation_activations(
+            repo,
+            seed=args.seed,
+            l2=args.l2,
+            epochs=args.epochs,
+            svd_rank=args.svd_rank,
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "collect-tool-activations":
+        from .steering_agent import collect_tool_activations
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = collect_tool_activations(
+            repo,
+            dataset=args.dataset,
+            config_path=config_path,
+            resume=args.resume,
+            max_tokens_per_message=args.max_tokens_per_message,
+            tail_tokens=args.tail_tokens,
+        )
+        print(f"Artifacts: {output}")
         return
 
     if args.command == "compare":
