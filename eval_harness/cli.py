@@ -126,6 +126,39 @@ def build_parser() -> argparse.ArgumentParser:
     v2_run_parser.add_argument("--rho-max", type=float, default=0.005)
     v2_run_parser.add_argument("--resume", action="store_true")
 
+    continuous_geometry_parser = commands.add_parser(
+        "build-continuous-geometry",
+        help="build the tokenwise paper-aligned continuous role basis",
+    )
+    continuous_geometry_parser.add_argument("--rank", type=int, default=4)
+    continuous_geometry_parser.add_argument("--sample-per-base", type=int, default=256)
+    continuous_geometry_parser.add_argument("--oversample", type=int, default=12)
+    continuous_geometry_parser.add_argument("--power-iterations", type=int, default=2)
+    continuous_geometry_parser.add_argument("--seed", type=int, default=20260906)
+    continuous_clean_parser = commands.add_parser(
+        "collect-continuous-clean",
+        help="collect one projected canonical Tool prefill per clean page",
+    )
+    continuous_clean_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
+    continuous_clean_parser.add_argument("--resume", action="store_true")
+    continuous_calibrate_parser = commands.add_parser(
+        "calibrate-continuous",
+        help="fit and diagnose the continuous clean Tool region",
+    )
+    continuous_calibrate_parser.add_argument("--window", type=int, default=32)
+    continuous_calibrate_parser.add_argument("--quantile", type=float, default=0.99)
+    continuous_calibrate_parser.add_argument(
+        "--diagnostic-rho", type=float, default=0.005
+    )
+    continuous_run_parser = commands.add_parser(
+        "run-continuous-v2",
+        help="run frozen continuous role-region steering on D_layer",
+    )
+    continuous_run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
+    continuous_run_parser.add_argument("--run-name", required=True)
+    continuous_run_parser.add_argument("--rho-max", type=float, required=True)
+    continuous_run_parser.add_argument("--resume", action="store_true")
+
     run_parser = commands.add_parser("run", help="run GPT-OSS evaluation")
     run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     run_parser.add_argument("--limit", type=int)
@@ -325,6 +358,62 @@ def main() -> None:
         if not config_path.is_absolute():
             config_path = repo / config_path
         output = run_v2_steering(
+            repo,
+            config_path,
+            args.run_name,
+            rho_max=args.rho_max,
+            resume=args.resume,
+        )
+        print((output / "summary.json").read_text())
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "build-continuous-geometry":
+        from .continuous_geometry import build_continuous_geometry
+
+        output = build_continuous_geometry(
+            repo,
+            rank=args.rank,
+            sample_per_base=args.sample_per_base,
+            oversample=args.oversample,
+            power_iterations=args.power_iterations,
+            seed=args.seed,
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "collect-continuous-clean":
+        from .continuous_diagnostics import collect_continuous_clean_projections
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = collect_continuous_clean_projections(
+            repo, config_path, resume=args.resume
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "calibrate-continuous":
+        from .continuous_diagnostics import calibrate_continuous
+
+        output = calibrate_continuous(
+            repo,
+            window=args.window,
+            quantile=args.quantile,
+            diagnostic_rho=args.diagnostic_rho,
+        )
+        print((output / "diagnostic_report.json").read_text())
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "run-continuous-v2":
+        from .continuous_runtime import run_continuous_steering
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = run_continuous_steering(
             repo,
             config_path,
             args.run_name,
