@@ -66,9 +66,7 @@ def build_parser() -> argparse.ArgumentParser:
         "rescore-steering-baseline",
         help="apply the grounded-summary utility scorer to saved baselines",
     )
-    rescore_parser.add_argument(
-        "--dataset", choices=("clean", "layer"), required=True
-    )
+    rescore_parser.add_argument("--dataset", choices=("clean", "layer"), required=True)
     steering_run_parser = commands.add_parser(
         "run-steering", help="run a soft-pairwise or continuous intervention"
     )
@@ -82,9 +80,7 @@ def build_parser() -> argparse.ArgumentParser:
     steering_run_parser.add_argument("--alpha", type=float, required=True)
     steering_run_parser.add_argument("--rank", type=int, default=4)
     steering_run_parser.add_argument("--run-name", required=True)
-    steering_run_parser.add_argument(
-        "--config", default="configs/gpt-oss-20b.yaml"
-    )
+    steering_run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     steering_run_parser.add_argument("--attack-only", action="store_true")
     steering_run_parser.add_argument("--resume", action="store_true")
 
@@ -92,10 +88,43 @@ def build_parser() -> argparse.ArgumentParser:
         "debug-steering",
         help="replay adverse soft-pairwise cases and write a token-level report",
     )
-    steering_debug_parser.add_argument(
-        "--config", default="configs/gpt-oss-20b.yaml"
-    )
+    steering_debug_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
     steering_debug_parser.add_argument("--output-dir", type=Path)
+
+    v2_data_parser = commands.add_parser(
+        "prepare-steering-v2-repr", help="freeze the paper-scale v2 role dataset"
+    )
+    v2_data_parser.add_argument("--seed", type=int, default=20260905)
+    v2_data_parser.add_argument("--force", action="store_true")
+    v2_collect_parser = commands.add_parser(
+        "collect-steering-v2-repr", help="capture paper-aligned pre-MLP states"
+    )
+    v2_collect_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
+    v2_collect_parser.add_argument("--resume", action="store_true")
+    v2_analyze_parser = commands.add_parser(
+        "analyze-steering-v2-repr", help="fit v2 L2 role probes and directions"
+    )
+    v2_analyze_parser.add_argument("--c", type=float, default=5e-3)
+    v2_analyze_parser.add_argument("--max-iter", type=int, default=100)
+    v2_tool_parser = commands.add_parser(
+        "collect-steering-v2-tool", help="replay Tool states at the pre-MLP site"
+    )
+    v2_tool_parser.add_argument("--dataset", choices=("clean", "layer"), required=True)
+    v2_tool_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
+    v2_tool_parser.add_argument("--resume", action="store_true")
+    v2_calibrate_parser = commands.add_parser(
+        "calibrate-steering-v2", help="fit the robust joint gate and diagnostics"
+    )
+    v2_calibrate_parser.add_argument("--window", type=int, default=32)
+    v2_calibrate_parser.add_argument("--quantile", type=float, default=0.99)
+    v2_calibrate_parser.add_argument("--rho-max", type=float, default=0.005)
+    v2_run_parser = commands.add_parser(
+        "run-steering-v2", help="run the frozen soft-pairwise v2 D_layer evaluation"
+    )
+    v2_run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
+    v2_run_parser.add_argument("--run-name", required=True)
+    v2_run_parser.add_argument("--rho-max", type=float, default=0.005)
+    v2_run_parser.add_argument("--resume", action="store_true")
 
     run_parser = commands.add_parser("run", help="run GPT-OSS evaluation")
     run_parser.add_argument("--config", default="configs/gpt-oss-20b.yaml")
@@ -235,6 +264,75 @@ def main() -> None:
             output_dir = repo / output_dir
         output = build_steering_debug_report(repo, config_path, output_dir)
         print(f"Report: {output}")
+        return
+
+    if args.command == "prepare-steering-v2-repr":
+        from .steering_v2_data import prepare_v2_representation_data
+
+        output = prepare_v2_representation_data(repo, args.seed, args.force)
+        print(f"Manifest: {output}")
+        return
+
+    if args.command == "collect-steering-v2-repr":
+        from .steering_v2_repr import collect_v2_representation_activations
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = collect_v2_representation_activations(
+            repo, config_path, resume=args.resume
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "analyze-steering-v2-repr":
+        from .steering_v2_repr import analyze_v2_representation_activations
+
+        output = analyze_v2_representation_activations(
+            repo, c_value=args.c, max_iter=args.max_iter
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "collect-steering-v2-tool":
+        from .steering_v2_diagnostics import collect_v2_tool_activations
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = collect_v2_tool_activations(
+            repo, args.dataset, config_path, resume=args.resume
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "calibrate-steering-v2":
+        from .steering_v2_diagnostics import calibrate_and_diagnose_v2
+
+        output = calibrate_and_diagnose_v2(
+            repo,
+            window=args.window,
+            quantile=args.quantile,
+            rho_max=args.rho_max,
+        )
+        print(f"Artifacts: {output}")
+        return
+
+    if args.command == "run-steering-v2":
+        from .steering_v2_runtime import run_v2_steering
+
+        config_path = Path(args.config)
+        if not config_path.is_absolute():
+            config_path = repo / config_path
+        output = run_v2_steering(
+            repo,
+            config_path,
+            args.run_name,
+            rho_max=args.rho_max,
+            resume=args.resume,
+        )
+        print((output / "summary.json").read_text())
+        print(f"Artifacts: {output}")
         return
 
     if args.command == "compare":
