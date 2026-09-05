@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "method": "tokenwise across-role-centered continuous role covariance",
+  "selection": "layers are top three by representation-dev probe accuracy",
+  "representation_bases": 250,
+  "representation_train_bases": 175,
+  "rank": 4,
+  "state_sha256": "385664bc5fd38413a851764ebb797bf417d10d8522a2c9943aa6af343db51b39",
+  "elapsed_seconds": 80.337,
+  "layers": [
+    {
+      "layer": 16,
+      "elapsed_seconds": 28.857,
+      "algorithm": "deterministic randomized block power eigensolver",
+      "centering": "per matched token across five roles",
+      "base_weighting": "equal bases via fixed deterministic token sample",
+      "sample_per_base_max": 256,
+      "sampled_tokens_per_role": 39819,
+      "sampled_role_centered_vectors": 199095,
+      "oversample": 12,
+      "power_iterations": 2,
+      "seed": 20260922,
+      "covariance_trace": 160.0079742213658,
+      "leading_eigenvalues": [
+        19.76692771911621,
+        4.140125274658203,
+        3.0090222358703613,
+        2.38928484916687
+      ],
+      "leading_standard_deviations": [
+        4.4460015296936035,
+        2.0347297191619873,
+        1.734653353691101,
+        1.5457311868667603
+      ],
+      "captured_trace_fraction": 0.18314935266971588,
+      "iteration_operator_norms": [
+        1.6856293678283691,
+        20.716564178466797,
+        21.023332595825195
+      ],
+      "orthogonality_max_abs_error": 3.5762786865234375e-07
+    },
+    {
+      "layer": 18,
+      "elapsed_seconds": 25.76,
+      "algorithm": "deterministic randomized block power eigensolver",
+      "centering": "per matched token across five roles",
+      "base_weighting": "equal bases via fixed deterministic token sample",
+      "sample_per_base_max": 256,
+      "sampled_tokens_per_role": 39819,
+      "sampled_role_centered_vectors": 199095,
+      "oversample": 12,
+      "power_iterations": 2,
+      "seed": 20260924,
+      "covariance_trace": 158.72615720476423,
+      "leading_eigenvalues": [
+        29.825021743774414,
+        5.252566814422607,
+        2.9181737899780273,
+        2.456559658050537
+      ],
+      "leading_standard_deviations": [
+        5.461228847503662,
+        2.2918479442596436,
+        1.708266258239746,
+        1.5673415660858154
+      ],
+      "captured_trace_fraction": 0.25485605001449585,
+      "iteration_operator_norms": [
+        2.006823778152466,
+        30.623010635375977,
+        30.79884147644043
+      ],
+      "orthogonality_max_abs_error": 2.384185791015625e-07
+    },
+    {
+      "layer": 8,
+      "elapsed_seconds": 25.714,
+      "algorithm": "deterministic randomized block power eigensolver",
+      "centering": "per matched token across five roles",
+      "base_weighting": "equal bases via fixed deterministic token sample",
+      "sample_per_base_max": 256,
+      "sampled_tokens_per_role": 39819,
+      "sampled_role_centered_vectors": 199095,
+      "oversample": 12,
+      "power_iterations": 2,
+      "seed": 20260914,
+      "covariance_trace": 25.272673184531076,
+      "leading_eigenvalues": [
+        3.502908945083618,
+        0.7916334271430969,
+        0.6225589513778687,
+        0.5403281450271606
+      ],
+      "leading_standard_deviations": [
+        1.8716059923171997,
+        0.8897378444671631,
+        0.7890240550041199,
+        0.7350701689720154
+      ],
+      "captured_trace_fraction": 0.215941920876503,
+      "iteration_operator_norms": [
+        0.311908096075058,
+        3.7337942123413086,
+        3.7795839309692383
+      ],
+      "orthogonality_max_abs_error": 2.384185791015625e-07
+    }
+  ]
+}

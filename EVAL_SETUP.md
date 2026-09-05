@@ -42,10 +42,30 @@ role-confusion-eval run --limit 10 --run-name sanity-10
 role-confusion-eval run --run-name baseline-gpt-oss-20b
 ```
 
-Each immutable directory under `eval_runs/` contains:
+If a run is interrupted, resume the same validated case set without repeating
+completed cases:
+
+```bash
+role-confusion-eval run --limit 10 --run-name sanity-10 --resume
+```
+
+For the frozen Phase 1 equivalence suite and its strict behavioral gate, run:
+
+```bash
+scripts/reproduce_phase1.sh
+```
+
+Select an explicit ordered suite with `--case-ids 54,175`. Compare any two
+existing run directories with `role-confusion-eval compare --reference ... --candidate ...`;
+the command exits nonzero if raw generations, parsed calls, simulator events,
+labels, termination reasons, metadata, or semantic summaries differ.
+
+
+Each run directory under `eval_runs/` contains (and is immutable once complete):
 
 - `run.json`: complete config, git commit, manifest hash, and selected case IDs
 - `results.jsonl`: raw generations, token counts, timings, tool events, and labels
+- `run_state.json`: completed/remaining case IDs for safe resumability
 - `summary.json`: overall and per-variant prompt-injection/exfiltration rates
 
 `prompt_injection_rate` is

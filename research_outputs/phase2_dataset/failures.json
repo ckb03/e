@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "phase": "phase2_dataset_preparation",
+  "events": [
+    {
+      "stage": "first_freeze_attempt",
+      "status": "failed",
+      "error_type": "ValueError",
+      "error": "Compression type zstd not supported",
+      "cause": "The pinned environment lacked the optional zstandard codec required by the selected Dolma3 shard.",
+      "effect": "No steering manifests were written.",
+      "resolution": "Pinned zstandard==0.23.0 in pyproject.toml and uv.lock; all 19 tests passed before the fixed-seed rerun."
+    },
+    {
+      "stage": "dependency_resolution_attempt_1",
+      "status": "failed",
+      "error_type": "NoSolution",
+      "error": "The PyTorch CUDA index shadowed PyPI for requests==2.32.5 under uv's first-index policy.",
+      "effect": "The environment and dependency files were not changed.",
+      "resolution": "Reran with uv --index-strategy unsafe-best-match and the repository's explicit pinned indexes."
+    },
+    {
+      "stage": "checksum_verification_attempts_1_and_2",
+      "status": "failed",
+      "error_type": "working_directory_error",
+      "error": "The portable checksum registry contains manifest basenames and was invoked from the wrong directory twice.",
+      "effect": "Read-only verification failed; artifacts were unchanged.",
+      "resolution": "Ran sha256sum -c STEERING_MANIFESTS.sha256 from eval_data; all five files passed."
+    },
+    {
+      "stage": "quality_json_verification_attempt_1",
+      "status": "failed",
+      "error_type": "jq_predicate_error",
+      "error": "The initial jq all predicate attempted to iterate each boolean.",
+      "effect": "Read-only verification failed after every JSONL row had already parsed successfully.",
+      "resolution": "Used all(.checks[]; . == true); all 23 checks passed."
+    }
+  ]
+}

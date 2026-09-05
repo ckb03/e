@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "manifest_path": "eval_data/steering_repr_manifest.jsonl",
+  "manifest_sha256": "69bf3ac49e2ba747d6439801608d4a0f0dc4fb2eeda87b8c9b9e921508b5a211",
+  "model_id": "openai/gpt-oss-20b",
+  "model_config_fingerprint": "a674f42689ce",
+  "hook": "decoder block output before next block",
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "max_tokens_per_base": 64,
+  "sampling": "deterministic evenly spaced content offsets",
+  "sequence_weighting": "equal base sequence weight in downstream fits",
+  "git_commit": "7c42b1311efce3c9310bb20b82672550245ae82c",
+  "num_layers": 24,
+  "hidden_size": 2880,
+  "model_type": "GptOssForCausalLM",
+  "elapsed_seconds": 69.681,
+  "shard_count": 150,
+  "status": "complete"
+}

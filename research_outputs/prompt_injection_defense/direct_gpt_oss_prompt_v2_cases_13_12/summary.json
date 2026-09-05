@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "case_ids": [
+    13,
+    12
+  ],
+  "judge_model": "openai/gpt-oss-20b",
+  "judge_url": "direct-transformers",
+  "temperature": 0,
+  "candidate_cap": 3,
+  "cases": 2,
+  "confirmed_injections": 1,
+  "judge_attempts": 2
+}

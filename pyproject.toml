@@ -16,6 +16,7 @@ dependencies = [
     "torch==2.9.1",
     "tqdm==4.67.1",
     "transformers==4.57.5",
+    "zstandard==0.23.0",
 ]
 [project.scripts]
 role-confusion-eval = "eval_harness.cli:main"
@@ -38,5 +39,9 @@ dev = [
     "pytest>=9.1.1",
     "ruff>=0.16.5",
 ]
+
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 [tool.setuptools.packages.find]
 include = ["eval_harness*"]

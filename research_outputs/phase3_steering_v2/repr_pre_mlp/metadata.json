@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "manifest_path": "eval_data/steering_repr_v2_manifest.jsonl",
+  "manifest_sha256": "9d67f6d1fa800a439518afeb9716f9ad71bd19a0703036c2325ca7d7d39d7780",
+  "model_id": "openai/gpt-oss-20b",
+  "model_config_fingerprint": "a674f42689ce",
+  "hook": "GPT-OSS layer.post_attention_layernorm output / MLP input",
+  "upstream_name": "all_pre_mlp_hidden_states",
+  "selected_layers": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22
+  ],
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "token_sampling": "all aligned content tokens, maximum 1024 per base",
+  "sequence_weighting": "equal underlying base in downstream fits",
+  "git_commit": "b3c16af4b127b3edfd9b1264506c20e6ee228f29",
+  "num_model_layers": 24,
+  "hidden_size": 2880,
+  "model_type": "GptOssForCausalLM",
+  "elapsed_seconds": 95.809,
+  "status": "complete",
+  "completed_bases": 250
+}
