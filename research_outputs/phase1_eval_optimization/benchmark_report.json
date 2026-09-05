@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "manifest_sha256": "bbd34526386002629f7b2d253751e627ef722b33175830a67cf78ad19ee1a0d9",
+  "case_ids": [
+    54,
+    175
+  ],
+  "protocol": {
+    "model": "openai/gpt-oss-20b",
+    "temperature": 1.0,
+    "reasoning": "high",
+    "max_new_tokens": 4096,
+    "max_steps": 8,
+    "attention": "kernels-community/vllm-flash-attn3"
+  },
+  "profile": {
+    "case_id": 175,
+    "prefill_seconds": 5.110583312988282,
+    "prefill_calls": 5,
+    "prefill_input_tokens": 159315,
+    "decode_seconds": 56.922040260314944,
+    "decode_calls": 1470,
+    "decode_input_tokens": 1470,
+    "prefill_fraction_of_cuda_forward_time": 0.08238541300690216,
+    "decode_fraction_of_cuda_forward_time": 0.9176145869930978
+  },
+  "oracle_repeat": {
+    "reference_seconds": 116.485,
+    "repeat_seconds": 103.374,
+    "reference_over_repeat_ratio": 1.1268307311316192,
+    "end_to_end_seconds_per_case": 51.687,
+    "generated_tokens": 2516,
+    "generated_tokens_per_second": 24.33880859790663,
+    "peak_vram_gib": 17.506,
+    "gpu_utilization_mean_percent_model_resident": 30.085714285714285,
+    "gpu_utilization_max_percent": 100.0,
+    "sampled_framebuffer_max_gib": 22.8408203125,
+    "exact_equivalence": true,
+    "interpretation": "same-path repeat variance; not an optimization claim"
+  },
+  "candidates": [
+    {
+      "name": "transformers_continuous_batching_independent_rng",
+      "status": "rejected_experimental",
+      "seconds": 118.20533268060535,
+      "speedup_vs_oracle_repeat": 0.8745290728914904,
+      "raw_generations_equivalent": false,
+      "tool_events_equivalent": false,
+      "reason": "batch-shape numerical differences changed sampled generations and tool trajectories; also slower on the two-case suite"
+    },
+    {
+      "name": "transformers_static_cache_compiled_decode",
+      "status": "rejected_experimental",
+      "seconds": 24.67996941227466,
+      "speedup_vs_oracle_repeat": 4.188578935133794,
+      "raw_generations_equivalent": false,
+      "tool_events_equivalent": false,
+      "reason": "faster but changed generations; case 175 changed from successful attack to unnoticed, violating the exactness gate"
+    },
+    {
+      "name": "exact_cross_step_kv_reuse",
+      "status": "not_promoted",
+      "measured_upper_bound_seconds_saved_case175": 5.110583312988282,
+      "measured_upper_bound_fraction_case175": 0.08238541300690216,
+      "reason": "profile shows only 8.2% of CUDA forward time in repeated prefill on H200; static cache already demonstrated cache-path sensitivity"
+    },
+    {
+      "name": "vllm_or_sglang",
+      "status": "not_available_not_promoted",
+      "reason": "engines absent from pinned environment; engine and sampler changes cannot satisfy bitwise gate without a dedicated equivalence implementation"
+    }
+  ],
+  "best_configuration": {
+    "backend": "transformers_sequential_oracle",
+    "accepted_faster_exact_method": false,
+    "operational_improvements": [
+      "per-case flush and validated resume",
+      "fixed ordered case selection",
+      "timing/token/peak-VRAM metrics",
+      "automated raw/event/label/summary equivalence gate"
+    ]
+  }
+}

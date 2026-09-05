@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="850" viewBox="0 0 1500 850">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:system-ui,sans-serif;fill:#111}</style>
+<text x="48" y="38" font-size="24" font-weight="bold">Stage volume: how much of each observable Tool result survives?</text>
+<text x="48" y="65" font-size="13">Frozen held-out 50: 43 injection-observed Tool results. The 7 cases that never exposed the page are excluded.</text>
+<rect x="48" y="82" width="18" height="18" fill="#2E77D0"/><text x="75" y="96" font-size="13">Base injection (n=23)</text>
+<rect x="270" y="82" width="18" height="18" fill="#E58B2A"/><text x="297" y="96" font-size="13">CoT-forgery (n=20)</text>
+<text x="115" y="137" font-size="17" font-weight="bold">Candidate regions</text>
+<line x1="115" y1="400.0" x2="1440" y2="400.0" stroke="#D0D5DD"/>
+<text x="105" y="404.0" text-anchor="end" font-size="11">0</text>
+<line x1="115" y1="318.3" x2="1440" y2="318.3" stroke="#D0D5DD"/>
+<text x="105" y="322.3" text-anchor="end" font-size="11">10</text>
+<line x1="115" y1="236.7" x2="1440" y2="236.7" stroke="#D0D5DD"/>
+<text x="105" y="240.7" text-anchor="end" font-size="11">20</text>
+<line x1="115" y1="155.0" x2="1440" y2="155.0" stroke="#D0D5DD"/>
+<text x="105" y="159.0" text-anchor="end" font-size="11">30</text>
+<line x1="115" y1="155" x2="115" y2="400" stroke="#000" stroke-width="1.5"/>
+<line x1="115" y1="400" x2="1440" y2="400" stroke="#000" stroke-width="1.5"/>
+<text x="32" y="277.5" text-anchor="middle" font-size="12" font-weight="bold" transform="rotate(-90 32 277.5)">regions per Tool result</text>
+<rect x="205.6" y="180.2" width="70.0" height="219.8" fill="#2E77D0"/>
+<text x="240.6" y="173.2" text-anchor="middle" font-size="10" font-weight="bold">26.9</text>
+<rect x="285.6" y="196.2" width="70.0" height="203.8" fill="#E58B2A"/>
+<text x="320.6" y="189.2" text-anchor="middle" font-size="10" font-weight="bold">24.9</text>
+<text x="280.6" y="423.0" text-anchor="middle" font-size="11">
+<tspan x="280.6" dy="0">Sustained</tspan>
+<tspan x="280.6" dy="15">seeds</tspan>
+</text>
+<rect x="536.9" y="238.1" width="70.0" height="161.9" fill="#2E77D0"/>
+<text x="571.9" y="231.1" text-anchor="middle" font-size="10" font-weight="bold">19.8</text>
+<rect x="616.9" y="255.9" width="70.0" height="144.1" fill="#E58B2A"/>
+<text x="651.9" y="248.9" text-anchor="middle" font-size="10" font-weight="bold">17.6</text>
+<text x="611.9" y="423.0" text-anchor="middle" font-size="11">
+<tspan x="611.9" dy="0">Merged</tspan>
+<tspan x="611.9" dy="15">padded</tspan>
+</text>
+<rect x="868.1" y="374.4" width="70.0" height="25.6" fill="#2E77D0"/>
+<text x="903.1" y="367.4" text-anchor="middle" font-size="10" font-weight="bold">3.1</text>
+<rect x="948.1" y="374.7" width="70.0" height="25.3" fill="#E58B2A"/>
+<text x="983.1" y="367.7" text-anchor="middle" font-size="10" font-weight="bold">3.1</text>
+<text x="943.1" y="423.0" text-anchor="middle" font-size="11">
+<tspan x="943.1" dy="0">After</tspan>
+<tspan x="943.1" dy="15">structural filter</tspan>
+</text>
+<rect x="1199.4" y="379.8" width="70.0" height="20.2" fill="#2E77D0"/>
+<text x="1234.4" y="372.8" text-anchor="middle" font-size="10" font-weight="bold">2.5</text>
+<rect x="1279.4" y="377.9" width="70.0" height="22.1" fill="#E58B2A"/>
+<text x="1314.4" y="370.9" text-anchor="middle" font-size="10" font-weight="bold">2.7</text>
+<text x="1274.4" y="423.0" text-anchor="middle" font-size="11">
+<tspan x="1274.4" dy="0">Top-K</tspan>
+<tspan x="1274.4" dy="15">emitted</tspan>
+</text>
+<text x="115" y="487" font-size="17" font-weight="bold">Union token coverage</text>
+<line x1="115" y1="750.0" x2="1440" y2="750.0" stroke="#D0D5DD"/>
+<text x="105" y="754.0" text-anchor="end" font-size="11">0</text>
+<line x1="115" y1="701.0" x2="1440" y2="701.0" stroke="#D0D5DD"/>
+<text x="105" y="705.0" text-anchor="end" font-size="11">5</text>
+<line x1="115" y1="652.0" x2="1440" y2="652.0" stroke="#D0D5DD"/>
+<text x="105" y="656.0" text-anchor="end" font-size="11">10</text>
+<line x1="115" y1="603.0" x2="1440" y2="603.0" stroke="#D0D5DD"/>
+<text x="105" y="607.0" text-anchor="end" font-size="11">15</text>
+<line x1="115" y1="554.0" x2="1440" y2="554.0" stroke="#D0D5DD"/>
+<text x="105" y="558.0" text-anchor="end" font-size="11">20</text>
+<line x1="115" y1="505.0" x2="1440" y2="505.0" stroke="#D0D5DD"/>
+<text x="105" y="509.0" text-anchor="end" font-size="11">25</text>
+<line x1="115" y1="505" x2="115" y2="750" stroke="#000" stroke-width="1.5"/>
+<line x1="115" y1="750" x2="1440" y2="750" stroke="#000" stroke-width="1.5"/>
+<text x="32" y="627.5" text-anchor="middle" font-size="12" font-weight="bold" transform="rotate(-90 32 627.5)">% of Tool-result tokens</text>
+<rect x="205.6" y="708.2" width="70.0" height="41.8" fill="#2E77D0"/>
+<text x="240.6" y="701.2" text-anchor="middle" font-size="10" font-weight="bold">4.3%</text>
+<rect x="285.6" y="709.9" width="70.0" height="40.1" fill="#E58B2A"/>
+<text x="320.6" y="702.9" text-anchor="middle" font-size="10" font-weight="bold">4.1%</text>
+<text x="280.6" y="773.0" text-anchor="middle" font-size="11">
+<tspan x="280.6" dy="0">Sustained</tspan>
+<tspan x="280.6" dy="15">seeds</tspan>
+</text>
+<rect x="536.9" y="522.0" width="70.0" height="228.0" fill="#2E77D0"/>
+<text x="571.9" y="517.0" text-anchor="middle" font-size="10" font-weight="bold">23.3%</text>
+<rect x="616.9" y="543.7" width="70.0" height="206.3" fill="#E58B2A"/>
+<text x="651.9" y="536.7" text-anchor="middle" font-size="10" font-weight="bold">21.1%</text>
+<text x="611.9" y="773.0" text-anchor="middle" font-size="11">
+<tspan x="611.9" dy="0">Merged</tspan>
+<tspan x="611.9" dy="15">padded</tspan>
+</text>
+<rect x="868.1" y="712.4" width="70.0" height="37.6" fill="#2E77D0"/>
+<text x="903.1" y="705.4" text-anchor="middle" font-size="10" font-weight="bold">3.8%</text>
+<rect x="948.1" y="709.4" width="70.0" height="40.6" fill="#E58B2A"/>
+<text x="983.1" y="702.4" text-anchor="middle" font-size="10" font-weight="bold">4.1%</text>
+<text x="943.1" y="773.0" text-anchor="middle" font-size="11">
+<tspan x="943.1" dy="0">After</tspan>
+<tspan x="943.1" dy="15">structural filter</tspan>
+</text>
+<rect x="1199.4" y="719.3" width="70.0" height="30.7" fill="#2E77D0"/>
+<text x="1234.4" y="712.3" text-anchor="middle" font-size="10" font-weight="bold">3.1%</text>
+<rect x="1279.4" y="713.5" width="70.0" height="36.5" fill="#E58B2A"/>
+<text x="1314.4" y="706.5" text-anchor="middle" font-size="10" font-weight="bold">3.7%</text>
+<text x="1274.4" y="773.0" text-anchor="middle" font-size="11">
+<tspan x="1274.4" dy="0">Top-K</tspan>
+<tspan x="1274.4" dy="15">emitted</tspan>
+</text>
+<text x="48" y="825" font-size="12">Merged coverage rises because each seed cluster is padded with context; filtering then removes most markup-heavy/non-prose regions.</text>
+</svg>

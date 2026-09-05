@@ -243,6 +243,8 @@ def tool_span_plan(
                 "tool_message_sha256": hashlib.sha256(
                     match.group("body").encode()
                 ).hexdigest(),
+                "content_char_start": body_start,
+                "content_char_end": body_end,
                 "full_content_token_count": len(full_positions),
                 "selected_token_count": len(selected),
                 "selected_start": selected_start,

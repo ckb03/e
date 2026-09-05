@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "started_at_utc": "2026-09-04T14:52:22.275837+00:00",
+  "judge_url": "http://127.0.0.1:8017",
+  "judge_model": "Qwen/Qwen3.8-27B-FP8",
+  "judge_health": {
+    "status": "ok",
+    "model": "Qwen/Qwen3.8-27B-FP8",
+    "backend": "direct-transformers-bf16-dequantized",
+    "load_seconds": 18.80331288650632
+  },
+  "selection_manifest_sha256": "2669d05a21b0c6f4d6f8df7bf595e5eb95296ef15500941dbda1afff58ed0161",
+  "probe_state_sha256": "2264cc428ae885919c35a5ef08db4ae384aa1b31b01d37cdf392443b8623e770",
+  "probe_quality_report": "research_outputs/phase3_steering_v2/representation_analysis/analysis_report.json",
+  "probe_quality_report_sha256": "419e08a905c6f798df644e7bd53226c77329b1bf30038a1ed99b153ad8194c38",
+  "diagnostic_format": "per-Tool PyTorch files containing token IDs/text, all five role logits at layers 8/18, selector contrasts, selector metadata, and offline exact-injection overlap labels"
+}

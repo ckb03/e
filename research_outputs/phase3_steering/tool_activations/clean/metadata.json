@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "dataset": "clean",
+  "manifest_path": "eval_data/steering_clean_manifest.jsonl",
+  "manifest_sha256": "f11992f78f2d7107760a4222a61aae6e9337e5de7c8e11e4e9879fbfddd2c70e",
+  "config_fingerprint": "a674f42689ce",
+  "model_id": "openai/gpt-oss-20b",
+  "hook": "decoder block output before next block",
+  "max_tokens_per_tool_message": 512,
+  "tail_tokens": 128,
+  "sampling": "evenly spaced plus tail; each unique Tool message captured once",
+  "git_commit": "1516535b02337833071754519909a9d0fdfc3e41",
+  "num_layers": 24,
+  "hidden_size": 2880,
+  "status": "complete",
+  "result_count": 30,
+  "results_sha256": "c314d61bbf936d2013b3d453fb2266e7afab7399839bb53dbd0d3cdbc7c72ecb"
+}

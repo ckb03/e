@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "seed": 20260905,
+  "manifest": "eval_data/steering_repr_v2_manifest.jsonl",
+  "manifest_sha256": "9d67f6d1fa800a439518afeb9716f9ad71bd19a0703036c2325ca7d7d39d7780",
+  "base_count": 250,
+  "roles": [
+    "system",
+    "user",
+    "cot",
+    "assistant",
+    "tool"
+  ],
+  "source_counts": {
+    "dolma3": 188,
+    "c4": 62
+  },
+  "split_counts": {
+    "repr_train": 175,
+    "repr_dev": 35,
+    "repr_test": 40
+  },
+  "max_content_tokens": 1024,
+  "mean_content_tokens": 556.988,
+  "content_tokens_by_split": {
+    "repr_train": 100248,
+    "repr_dev": 17636,
+    "repr_test": 21363
+  },
+  "checks": {
+    "same_content_ids_all_roles": true,
+    "base_level_split": true,
+    "unique_content": true,
+    "eval_url_disjoint": true,
+    "native_gptoss_wrappers": true,
+    "content_only_bounds": true
+  }
+}

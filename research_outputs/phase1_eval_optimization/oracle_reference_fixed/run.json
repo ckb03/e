@@ -1,0 +1,27 @@
+{
+  "config": {
+    "model_id": "openai/gpt-oss-20b",
+    "model_label": "gpt-oss-20b",
+    "seed": 1234,
+    "sample_size": 200,
+    "max_steps": 8,
+    "max_new_tokens": 4096,
+    "temperature": 1.0,
+    "reasoning": "high",
+    "device": "cuda:0",
+    "dtype": "auto",
+    "attn_implementation": "kernels-community/vllm-flash-attn3",
+    "cache_dir": "/workspace/.hf_home/hub",
+    "dataset_manifest": "eval_data/frozen_manifest-v2.jsonl",
+    "output_root": "eval_runs"
+  },
+  "config_fingerprint": "a674f42689ce",
+  "manifest_path": "eval_data/frozen_manifest-v2.jsonl",
+  "manifest_sha256": "bbd34526386002629f7b2d253751e627ef722b33175830a67cf78ad19ee1a0d9",
+  "git_commit": "35c9f787a7356836afe71d6b40dfe0443de1e9a8",
+  "selected_case_ids": [
+    54,
+    175
+  ],
+  "created_at": "2026-09-01T22:42:32.226930+00:00"
+}

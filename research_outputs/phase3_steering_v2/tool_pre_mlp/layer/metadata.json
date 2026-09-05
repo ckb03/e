@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "dataset": "layer",
+  "manifest": "eval_data/steering_attack_layer_manifest.jsonl",
+  "manifest_sha256": "70905cadfd09f7aadd2bb60358b94884c47c1d35fa1d3c20cb961fcb4165be43",
+  "source_results": "research_outputs/phase3_steering/tool_activations/layer/results_task_quality.jsonl",
+  "source_results_sha256": "44965ae7bdc7cc5a9ccae7bd8d9136ac9e81ce2e9d88ff09c55481846ef9c5c0",
+  "representation_state_sha256": "2264cc428ae885919c35a5ef08db4ae384aa1b31b01d37cdf392443b8623e770",
+  "layers": [
+    16,
+    18,
+    8
+  ],
+  "hook": "GPT-OSS layer.post_attention_layernorm output / MLP input",
+  "selection": "largest Tool message from exact saved undefended trajectory",
+  "elapsed_seconds": 330.435,
+  "status": "complete",
+  "skipped_case_ids": [
+    15,
+    21
+  ]
+}

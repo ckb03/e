@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "manifest": "eval_data/steering_clean_manifest.jsonl",
+  "manifest_sha256": "f11992f78f2d7107760a4222a61aae6e9337e5de7c8e11e4e9879fbfddd2c70e",
+  "geometry_state_sha256": "385664bc5fd38413a851764ebb797bf417d10d8522a2c9943aa6af343db51b39",
+  "layers": [
+    16,
+    18,
+    8
+  ],
+  "rank": 4,
+  "hook": "GPT-OSS layer.post_attention_layernorm output / MLP input",
+  "collection": "one canonical post-Tool prefill per clean page",
+  "storage": "projected z, residual norm, and token metadata only",
+  "status": "complete",
+  "elapsed_seconds": 308.574,
+  "completed_cases": 30
+}

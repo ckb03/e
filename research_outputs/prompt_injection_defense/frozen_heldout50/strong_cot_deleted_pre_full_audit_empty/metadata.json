@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "stage": "strong_cot_deleted",
+  "config": {
+    "model_id": "openai/gpt-oss-20b",
+    "model_label": "gpt-oss-20b",
+    "seed": 1234,
+    "sample_size": 200,
+    "max_steps": 8,
+    "max_new_tokens": 4096,
+    "temperature": 1.0,
+    "reasoning": "high",
+    "device": "cuda:0",
+    "dtype": "auto",
+    "attn_implementation": "kernels-community/vllm-flash-attn3",
+    "cache_dir": "/workspace/.hf_home/hub",
+    "dataset_manifest": "eval_data/frozen_manifest-v2.jsonl",
+    "output_root": "eval_runs"
+  },
+  "config_fingerprint": "a674f42689ce",
+  "selection_manifest_sha256": "2669d05a21b0c6f4d6f8df7bf595e5eb95296ef15500941dbda1afff58ed0161",
+  "probe_state_sha256": "2264cc428ae885919c35a5ef08db4ae384aa1b31b01d37cdf392443b8623e770",
+  "candidate_selector": "live frozen hybrid plateau selector, layers 8 and 18, cap 3",
+  "confirmed_text_mode": "redacted"
+}

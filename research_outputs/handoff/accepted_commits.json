@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "branch": "lab/phase1-exact-eval",
+  "accepted_commits": [
+    "16d492050b84e4c4ca80c8e55d3d637a9a3e7ac9",
+    "0d4e9808b383189793e5859e4057f9f591cbc1d7",
+    "2b8a1b2a45e7c72dcee396e2e90f860028f405f7"
+  ],
+  "accepted_faster_exact_method": false,
+  "production_backend": "transformers-sequential"
+}

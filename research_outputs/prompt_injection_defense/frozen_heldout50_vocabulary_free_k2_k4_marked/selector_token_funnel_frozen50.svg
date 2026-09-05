@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:system-ui,sans-serif;fill:#101828}</style>
+<text x="48" y="40" font-size="38" font-weight="bold">Figure 3: Token funnel: how much of each Tool result remains?</text>
+<text x="48" y="70" font-size="21">Funnel width is linearly proportional to union token coverage. Only the 43 Tool results that actually exposed an injection are included.</text>
+<text x="350" y="120" text-anchor="middle" font-size="27" font-weight="bold">Base injection (23 observable cases)</text>
+<text x="350" y="151" text-anchor="middle" font-size="19">640,209 Tool-result tokens in denominator</text>
+<polygon points="140.00,175 560.00,175 398.87,285 301.13,285" fill="#D0D5DD" opacity="0.88" stroke="white" stroke-width="2"/>
+<polygon points="301.13,285 398.87,285 358.06,395 341.94,395" fill="#98A2B3" opacity="0.88" stroke="white" stroke-width="2"/>
+<polygon points="341.94,395 358.06,395 356.58,505 343.42,505" fill="#66B5A3" opacity="0.88" stroke="white" stroke-width="2"/>
+<polygon points="343.42,505 356.58,505 352.02,615 347.98,615" fill="#288C7D" opacity="0.88" stroke="white" stroke-width="2"/>
+<rect x="347.80" y="615" width="4.40" height="48" fill="#2E77D0" stroke="#111" stroke-width="1"/>
+<line x1="560.00" y1="175" x2="575" y2="175" stroke="#344054" stroke-width="1"/>
+<circle cx="560.00" cy="175" r="2.5" fill="#344054"/>
+<text x="585" y="171" font-size="19" font-weight="bold">All tokens</text>
+<text x="585" y="199" font-size="21" fill="#2E77D0" font-weight="bold">100.00%</text>
+<line x1="398.87" y1="285" x2="575" y2="285" stroke="#344054" stroke-width="1"/>
+<circle cx="398.87" cy="285" r="2.5" fill="#344054"/>
+<text x="585" y="281" font-size="19" font-weight="bold">Merged + padded</text>
+<text x="585" y="309" font-size="21" fill="#2E77D0" font-weight="bold">23.27%</text>
+<line x1="358.06" y1="395" x2="575" y2="395" stroke="#344054" stroke-width="1"/>
+<circle cx="358.06" cy="395" r="2.5" fill="#344054"/>
+<text x="585" y="391" font-size="19" font-weight="bold">Structural filter</text>
+<text x="585" y="419" font-size="21" fill="#2E77D0" font-weight="bold">3.84%</text>
+<line x1="356.58" y1="505" x2="575" y2="505" stroke="#344054" stroke-width="1"/>
+<circle cx="356.58" cy="505" r="2.5" fill="#344054"/>
+<text x="585" y="501" font-size="19" font-weight="bold">Top-K to judge</text>
+<text x="585" y="529" font-size="21" fill="#2E77D0" font-weight="bold">3.14%</text>
+<line x1="352.20" y1="615" x2="575" y2="615" stroke="#344054" stroke-width="1"/>
+<circle cx="352.20" cy="615" r="2.5" fill="#344054"/>
+<text x="585" y="611" font-size="19" font-weight="bold">Judge YES span</text>
+<text x="585" y="639" font-size="21" fill="#2E77D0" font-weight="bold">0.96%</text>
+<rect x="140" y="714" width="420" height="72" rx="12" fill="#F2F4F7" stroke="#98A2B3"/>
+<text x="350" y="739" text-anchor="middle" font-size="19" font-weight="bold">Raw seed tokens (before padding)</text>
+<text x="350" y="778" text-anchor="middle" font-size="30" font-weight="bold" fill="#2E77D0">4.26%</text>
+<text x="1050" y="120" text-anchor="middle" font-size="27" font-weight="bold">CoT-forgery injection (20 observable cases)</text>
+<text x="1050" y="151" text-anchor="middle" font-size="19">557,175 Tool-result tokens in denominator</text>
+<polygon points="840.00,175 1260.00,175 1094.21,285 1005.79,285" fill="#D0D5DD" opacity="0.88" stroke="white" stroke-width="2"/>
+<polygon points="1005.79,285 1094.21,285 1058.71,395 1041.29,395" fill="#98A2B3" opacity="0.88" stroke="white" stroke-width="2"/>
+<polygon points="1041.29,395 1058.71,395 1057.82,505 1042.18,505" fill="#66B5A3" opacity="0.88" stroke="white" stroke-width="2"/>
+<polygon points="1042.18,505 1057.82,505 1053.25,615 1046.75,615" fill="#288C7D" opacity="0.88" stroke="white" stroke-width="2"/>
+<rect x="1046.75" y="615" width="6.49" height="48" fill="#E58B2A" stroke="#111" stroke-width="1"/>
+<line x1="1260.00" y1="175" x2="1275" y2="175" stroke="#344054" stroke-width="1"/>
+<circle cx="1260.00" cy="175" r="2.5" fill="#344054"/>
+<text x="1285" y="171" font-size="19" font-weight="bold">All tokens</text>
+<text x="1285" y="199" font-size="21" fill="#E58B2A" font-weight="bold">100.00%</text>
+<line x1="1094.21" y1="285" x2="1275" y2="285" stroke="#344054" stroke-width="1"/>
+<circle cx="1094.21" cy="285" r="2.5" fill="#344054"/>
+<text x="1285" y="281" font-size="19" font-weight="bold">Merged + padded</text>
+<text x="1285" y="309" font-size="21" fill="#E58B2A" font-weight="bold">21.05%</text>
+<line x1="1058.71" y1="395" x2="1275" y2="395" stroke="#344054" stroke-width="1"/>
+<circle cx="1058.71" cy="395" r="2.5" fill="#344054"/>
+<text x="1285" y="391" font-size="19" font-weight="bold">Structural filter</text>
+<text x="1285" y="419" font-size="21" fill="#E58B2A" font-weight="bold">4.15%</text>
+<line x1="1057.82" y1="505" x2="1275" y2="505" stroke="#344054" stroke-width="1"/>
+<circle cx="1057.82" cy="505" r="2.5" fill="#344054"/>
+<text x="1285" y="501" font-size="19" font-weight="bold">Top-K to judge</text>
+<text x="1285" y="529" font-size="21" fill="#E58B2A" font-weight="bold">3.72%</text>
+<line x1="1053.25" y1="615" x2="1275" y2="615" stroke="#344054" stroke-width="1"/>
+<circle cx="1053.25" cy="615" r="2.5" fill="#344054"/>
+<text x="1285" y="611" font-size="19" font-weight="bold">Judge YES span</text>
+<text x="1285" y="639" font-size="21" fill="#E58B2A" font-weight="bold">1.55%</text>
+<rect x="840" y="714" width="420" height="72" rx="12" fill="#F2F4F7" stroke="#98A2B3"/>
+<text x="1050" y="739" text-anchor="middle" font-size="19" font-weight="bold">Raw seed tokens (before padding)</text>
+<text x="1050" y="778" text-anchor="middle" font-size="30" font-weight="bold" fill="#E58B2A">4.09%</text>
+<text x="800" y="830" text-anchor="middle" font-size="21" font-weight="bold">Why seeds are outside the funnel: merging adds context, so coverage expands from about 4% of raw seed tokens to about 21-23%.</text>
+<text x="800" y="855" text-anchor="middle" font-size="19">The later stages are nested reductions: structural filtering, Top-K selection, and LLM-judge confirmation.</text>
+</svg>

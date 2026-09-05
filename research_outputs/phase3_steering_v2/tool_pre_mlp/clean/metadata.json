@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "dataset": "clean",
+  "manifest": "eval_data/steering_clean_manifest.jsonl",
+  "manifest_sha256": "f11992f78f2d7107760a4222a61aae6e9337e5de7c8e11e4e9879fbfddd2c70e",
+  "source_results": "research_outputs/phase3_steering/tool_activations/clean/results_task_quality.jsonl",
+  "source_results_sha256": "b2b6aa9532dd2ed92f85d788555393ebd81e4ef2b657c7f13c05dbf899d32049",
+  "representation_state_sha256": "2264cc428ae885919c35a5ef08db4ae384aa1b31b01d37cdf392443b8623e770",
+  "layers": [
+    16,
+    18,
+    8
+  ],
+  "hook": "GPT-OSS layer.post_attention_layernorm output / MLP input",
+  "selection": "largest Tool message from exact saved undefended trajectory",
+  "elapsed_seconds": 23.762,
+  "status": "complete",
+  "skipped_case_ids": [
+    24
+  ]
+}

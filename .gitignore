@@ -25,3 +25,23 @@ __pycache__/
 
 # Commit the exact frozen comparison set
 !eval_data/frozen_manifest-v2.jsonl
+
+# Machine-local research environments and caches
+.judge-venv/
+cleanroom/
+data_cache/
+
+# Editor/patch backups and local runner helpers
+*.orig
+*.rej
+tmux_codex.sh
+
+# Bulky raw replay transcripts and transient run state
+research_outputs/**/*.jsonl
+research_outputs/**/*.log
+research_outputs/**/status.json
+research_outputs/**/run_state.json
+research_outputs/**/__pycache__/
+research_outputs/**/*.lock
+research_outputs/handoff/*.patch
+research_outputs/handoff/*.patch.sha256

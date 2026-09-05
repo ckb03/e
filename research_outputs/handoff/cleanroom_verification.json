@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "base_commit": "35c9f787a7356836afe71d6b40dfe0443de1e9a8",
+  "patch_applied_commits": [
+    "37f04bb",
+    "71aaaf8",
+    "92c8f0e"
+  ],
+  "locked_environment_created": true,
+  "package_cache_retained": false,
+  "lint": "pass",
+  "unit_tests": {
+    "status": "pass",
+    "passed": 10
+  },
+  "manifest_sha256_check": "pass",
+  "case_ids": [
+    54,
+    175
+  ],
+  "suite_elapsed_seconds": 104.848,
+  "exact_equivalence": true,
+  "report_in_clean_checkout": "cleanroom/phase1_base_v2/research_outputs/phase1_eval_optimization/phase1-cleanroom-v2-equivalence.json",
+  "failed_attempts": [
+    "offline uv sync missed large wheel in ephemeral cache",
+    "initial manifest checksum invoked from wrong directory",
+    "nested clean checkout initially collided with pytest discovery; fixed by testpaths"
+  ]
+}
